@@ -2,11 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/app_colors.dart';
+import '../models/search_product.dart';
 import 'bottom_loader.dart';
 
 class SearchProductListItem extends StatelessWidget {
-  const SearchProductListItem({Key? key}) : super(key: key);
+  const SearchProductListItem({Key? key, required this.item}) : super(key: key);
 
+  final SearchProduct item;
   @override
   Widget build(BuildContext context) {
     final width=MediaQuery.of(context).size.width;
@@ -32,12 +34,19 @@ class SearchProductListItem extends StatelessWidget {
                 ),child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: CachedNetworkImage(
-                  imageUrl: "http://via.placeholder.com/200x150",
+                  imageUrl: item.image.toString(),
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.transparent,
+                        ),
+                      ],
                       image: DecorationImage(
+
                         image: imageProvider,
                         fit: BoxFit.fill,
+
                         // colorFilter: const ColorFilter.mode(Colors.white, BlendMode.colorBurn)
                       ),
                     ),
@@ -49,10 +58,10 @@ class SearchProductListItem extends StatelessWidget {
               ),
 
               //product description
-              const Padding(
+               Padding(
                 padding: EdgeInsets.only(top: 5.0,left: 8),
-                child: Text("Lays Classic Family Chips",
-                  style: TextStyle(
+                child: Text(item.brand!.name.toString(),
+                  style: const TextStyle(
                       fontSize:14,
                       fontWeight: FontWeight.w500,
                       color: AppColors.blackTextColor
@@ -66,8 +75,8 @@ class SearchProductListItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:  [
                     Row(
-                      children: const [
-                        Text("ক্রয়",
+                      children:  [
+                        const Text("ক্রয়",
                           style: TextStyle(
                               fontSize:8,
                               fontWeight: FontWeight.w400,
@@ -76,16 +85,17 @@ class SearchProductListItem extends StatelessWidget {
 
                         SizedBox(width: 5,),
 
-                        Text("৳ 220",
-                          style: TextStyle(
+                        Text(
+                          '৳ ${item.charge!.bookingPrice?.toString()}',
+                          style: const TextStyle(
                               fontSize:16,
                               fontWeight: FontWeight.w700,
                               color: AppColors.pinkTextColor
                           ),),
                       ],
                     ),
-                    const Text("৳ 220",
-                      style: TextStyle(
+                     Text(item.charge!.discountCharge.toString(),
+                      style: const TextStyle(
                           fontSize:12,
                           fontWeight: FontWeight.w500,
                           color: AppColors.pinkTextColor,
@@ -103,8 +113,8 @@ class SearchProductListItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:  [
                     Row(
-                      children: const [
-                        Text("ক্রয়",
+                      children:  [
+                        const Text("ক্রয়",
                           style: TextStyle(
                               fontSize:8,
                               fontWeight: FontWeight.w400,
@@ -113,15 +123,15 @@ class SearchProductListItem extends StatelessWidget {
 
                         SizedBox(width: 5,),
 
-                        Text("৳ 220",
-                          style: TextStyle(
+                        Text("৳ ${item.charge!.sellingPrice}",
+                          style: const TextStyle(
                               fontSize:16,
                               fontWeight: FontWeight.w700,
                               color: AppColors.pinkTextColor
                           ),),
                       ],
                     ),
-                    Text("৳ 220",
+                    Text("৳ ${item.charge!.discountCharge}",
                       style: TextStyle(
                           fontSize:12,
                           fontWeight: FontWeight.w500,

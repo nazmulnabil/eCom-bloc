@@ -5,9 +5,9 @@ class Loader extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: SizedBox(
-        height: 24,
-        width: 24,
-        child: CircularProgressIndicator(strokeWidth: 1.5),
+        height: 34,
+        width: 34,
+        child: CircularProgressIndicator(strokeWidth: 3.5),
       ),
     );
   }

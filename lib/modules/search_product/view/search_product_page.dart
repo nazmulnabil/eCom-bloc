@@ -1,194 +1,61 @@
-
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_bloc/modules/search_product/bloc/search_product_bloc.dart';
+import 'package:ecommerce_bloc/modules/search_product/view/search_product_list.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_polygon/flutter_polygon.dart';
-
-import '../../../core/app_colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/custom_textfield.dart';
 
-class SearchProduct extends StatelessWidget {
-  const SearchProduct({Key? key}) : super(key: key);
+class SearchProductPage extends StatelessWidget {
+  const SearchProductPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-   final width=MediaQuery.of(context).size.width;
-   final height=MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
         body: Column(
-          children: [
+          children:  [
 
-             SizedBox(height: 50,),
-            //Textfield
-            CustomTextField(),
-
-            Expanded(
-              child: Padding(
-
-                padding: const EdgeInsets.only(left: 15.0,right: 15.0),
-                child: GridView.builder(
-                    gridDelegate:  const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 200,
-                       childAspectRatio: 2 /3.25,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 15),
-                    itemCount: 20,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return   Stack(
-                        // alignment: Alignment.bottomCenter,
-                        children: [
-
-                          Container(
-                            margin: EdgeInsets.only(bottom: 15),
-
-                            decoration: const BoxDecoration(
-                              color: AppColors.colorWhite,
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                            ),
-                            child:Column(
-                              children:[
-                            //image container
-                                Container(
-                                height:width/2.75,
-                                decoration: const BoxDecoration(
-                                color: Colors.black12,
-                                borderRadius: BorderRadius.all(Radius.circular(15)),
-                                ),child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: CachedNetworkImage(
-                                    imageUrl: "http://via.placeholder.com/200x150",
-                                    imageBuilder: (context, imageProvider) => Container(
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: imageProvider,
-                                          fit: BoxFit.fill,
-                                          // colorFilter: const ColorFilter.mode(Colors.white, BlendMode.colorBurn)
-                                        ),
-                                      ),
-                                    ),
-                                    placeholder: (context, url) =>const CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) => const Icon(Icons.error),
-                                  ),
-                                ),
-                            ),
-
-                            //product description
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 5.0,left: 8),
-                                  child: Text("Lays Classic Family Chips",
-                                    style: TextStyle(
-                                        fontSize:14,
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.blackTextColor
-                                    ),),
-                                ),
-
-                            //price row
-                                 Container(
-                                   margin: const EdgeInsets.only(left: 8.0,right:8,top: 5,bottom: 0),
-                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children:  [
-                                      Row(
-                                        children: const [
-                                          Text("ক্রয়",
-                                            style: TextStyle(
-                                                fontSize:8,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppColors.greyTextColor
-                                            ),),
-
-                                          SizedBox(width: 5,),
-
-                                          Text("৳ 220",
-                                            style: TextStyle(
-                                                fontSize:16,
-                                                fontWeight: FontWeight.w700,
-                                                color: AppColors.pinkTextColor
-                                            ),),
-                                        ],
-                                      ),
-                                      const Text("৳ 220",
-                                        style: TextStyle(
-                                            fontSize:12,
-                                            fontWeight: FontWeight.w500,
-                                            color: AppColors.pinkTextColor,
-                                            decoration: TextDecoration.lineThrough
-                                        ),),
-
-                                    ],),
-                                 ),
-
-                            //seeling row
-
-                                Container(
-                                  margin:  const EdgeInsets.only(left: 8.0,right:8,bottom: 0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children:  [
-                                      Row(
-                                        children: const [
-                                          Text("ক্রয়",
-                                            style: TextStyle(
-                                                fontSize:8,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppColors.greyTextColor
-                                            ),),
-
-                                          SizedBox(width: 5,),
-
-                                          Text("৳ 220",
-                                            style: TextStyle(
-                                                fontSize:16,
-                                                fontWeight: FontWeight.w700,
-                                                color: AppColors.pinkTextColor
-                                            ),),
-                                        ],
-                                      ),
-                                      Text("৳ 220",
-                                        style: TextStyle(
-                                            fontSize:12,
-                                            fontWeight: FontWeight.w500,
-                                            color: AppColors.pinkTextColor,
-                                            decoration: TextDecoration.lineThrough
-                                        ),),
-
-                                    ],),
-                                ),
-                              // SizedBox(height: 20,)
-                          ],
-                            ),
-                          ),
-
-                          const Align(
-                              alignment: Alignment.bottomCenter,
-                              child: CircleAvatar(
-
-                                child: Icon(Icons.add),
-                                radius: 20,
-                              )
-                          ) ],
-                      );
-                    }),
-              ),
-            ),
-
-
-
-
-
-
-
-
+             const SizedBox(height: 50,),
+            //Textield
+             CustomTextField(),
+            _SearchBody(),
           ],
-
         ),
-
-
-
-
-
       ),
     );
   }
 }
+
+class _SearchBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SearchProductBloc, SearchProductState>(
+      builder: (context, state) {
+        if (state is SearchStateLoading) {
+          return const CircularProgressIndicator();
+        }
+        if (state is SearchStateError) {
+          return Text(state.error);
+        }
+        if (state is SearchStateSuccess) {
+
+         int length=  context.read<SearchProductBloc>().hasReachedMax?state.items.length:
+             state.items.length+2;
+         int itemsLength=state.items.length;
+
+         if (kDebugMode) {
+           print('length>>>>> $length');
+         }
+         if (kDebugMode) {
+           print('items  length>>>>> $itemsLength');
+         }
+          return state.items.isEmpty
+              ? const Text('No Results')
+              : Expanded(child: SearchProductList(items: state.items,len:length, itemsLen: itemsLength,));
+        }
+        return const Text('Please enter a term to begin');
+      },
+    );
+  }
+}
+

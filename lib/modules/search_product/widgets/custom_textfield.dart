@@ -1,9 +1,33 @@
+import 'package:ecommerce_bloc/modules/search_product/bloc/search_product_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/app_colors.dart';
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({Key? key}) : super(key: key);
+class CustomTextField extends StatefulWidget {
+
+   CustomTextField({Key? key}) : super(key: key);
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+    final _textController = TextEditingController();
+
+    late SearchProductBloc _searchProductBloc;
+
+    @override
+    void initState() {
+      super.initState();
+      _searchProductBloc = context.read<SearchProductBloc>();
+    }
+
+    @override
+    void dispose() {
+      _textController.dispose();
+      super.dispose();
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +36,13 @@ class CustomTextField extends StatelessWidget {
       child: SizedBox(
         height: 48,
         child: TextField(
+          controller: _textController,
+          autocorrect: false,
+          onChanged: (text) {
+            _searchProductBloc.add(
+              TextChanged(text: text),
+            );
+          },
           decoration: InputDecoration(
               suffixIcon: IconButton(
                 onPressed:() {
