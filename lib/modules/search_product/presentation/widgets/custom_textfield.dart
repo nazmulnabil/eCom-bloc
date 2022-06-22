@@ -1,8 +1,10 @@
-import 'package:ecommerce_bloc/modules/search_product/bloc/search_product_bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/app_colors.dart';
+import '../../../../core/app_colors.dart';
+import '../bloc/search_product_bloc.dart';
+
 
 class CustomTextField extends StatefulWidget {
 

@@ -1,8 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:ecommerce_bloc/data/repositories/search_product_repository_interface.dart';
 import 'package:equatable/equatable.dart';
 import 'package:stream_transform/stream_transform.dart';
-import '../models/search_product.dart';
+
+import '../../data/models/search_product.dart';
+import '../../data/repositories/search_product_repository_interface.dart';
+
+
 part 'search_product_event.dart';
 part 'search_product_state.dart';
 

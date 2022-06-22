@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ecommerce_bloc/modules/search_product/models/search_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../core/app_colors.dart';
+import '../../data/models/search_product.dart';
 import '../bloc/search_product_bloc.dart';
 import '../widgets/bottom_loader.dart';
 import '../widgets/search_product_list_item.dart';
@@ -11,9 +9,9 @@ import '../widgets/search_product_list_item.dart';
 class SearchProductList extends StatefulWidget {
   const SearchProductList({Key? key, required this.items, required this.len, required this.itemsLen}) : super(key: key);
 
- final List<SearchProduct> items;
- final int len;
- final int itemsLen;
+  final List<SearchProduct> items;
+  final int len;
+  final int itemsLen;
 
   @override
   State<SearchProductList> createState() => _SearchProductListState();
@@ -34,7 +32,7 @@ class _SearchProductListState extends State<SearchProductList> {
 
     final SearchProductBloc searchProductBloc=context.read<SearchProductBloc>();
 
-   // final width=MediaQuery.of(context).size.width;
+    // final width=MediaQuery.of(context).size.width;
     print("items >>>>>>>>>>>>>>> ${widget.items}");
     print("len >>>>>>>>> ${widget.len}");
     print("items len len >>>>>>>>> ${widget.itemsLen}");
@@ -51,7 +49,7 @@ class _SearchProductListState extends State<SearchProductList> {
           if( index>=widget.itemsLen) {
             return Loader();
           } else{
-            return SearchProductListItem(item: widget.items[index],);
+            return SearchProductListItem(item: widget.items[index], index: index,);
           }
 
         });

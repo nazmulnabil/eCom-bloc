@@ -1,8 +1,10 @@
 import 'dart:convert';
-import 'package:ecommerce_bloc/data/remote/product_remote_data_source.dart';
+import 'package:ecommerce_bloc/modules/search_product/data/remote/product_remote_data_source.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../modules/search_product/models/search_product.dart';
+import '../models/search_product.dart';
+
+
 
 
 class ProductRemoteDataSourceImpl implements ProductRemoteDataSource{

@@ -1,4 +1,6 @@
-import 'package:ecommerce_bloc/modules/search_product/models/search_product.dart';
+
+
+import '../models/search_product.dart';
 
 abstract class SearchProductRepository {
   Future<List<SearchProduct>> search(

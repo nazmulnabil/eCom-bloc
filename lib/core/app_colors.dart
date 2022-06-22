@@ -4,6 +4,10 @@ abstract class AppColors {
   static const Color pageBackground = Color(0xFFE5E5E5);
   static const Color textfieldSearchIconColor = Color(0xFFA7A7A7);
   static const Color hintTextColor = Color(0xFF989898);
+  static const Color decrementButtonBackground = Color(0xFFFFBFDD);
+  static const Color counterButtonTextColor = Color(0xFFDA2079);
+  static const Color counterRowBackground = Color(0xFFFFCCE4);
+
   static const Color statusBarColor = Color(0xFF38686A);
   static const Color appBarColor = Color(0xFF38686A);
   static const Color appBarIconColor = Color(0xFF323232);

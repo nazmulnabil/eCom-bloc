@@ -1,14 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/app_colors.dart';
-import '../models/search_product.dart';
+import '../../../../core/app_colors.dart';
+import '../../data/models/search_product.dart';
+import 'add_to_cart_button.dart';
 import 'bottom_loader.dart';
 
 class SearchProductListItem extends StatelessWidget {
-  const SearchProductListItem({Key? key, required this.item}) : super(key: key);
+  const SearchProductListItem({Key? key, required this.item, required this.index}) : super(key: key);
 
   final SearchProduct item;
+  final int index;
   @override
   Widget build(BuildContext context) {
     final width=MediaQuery.of(context).size.width;
@@ -58,7 +59,7 @@ class SearchProductListItem extends StatelessWidget {
               ),
 
               //product description
-               Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 5.0,left: 8),
                 child: Text(item.brand!.name.toString(),
                   style: const TextStyle(
@@ -94,7 +95,7 @@ class SearchProductListItem extends StatelessWidget {
                           ),),
                       ],
                     ),
-                     Text(item.charge!.discountCharge.toString(),
+                    Text(item.charge!.discountCharge.toString(),
                       style: const TextStyle(
                           fontSize:12,
                           fontWeight: FontWeight.w500,
@@ -132,7 +133,7 @@ class SearchProductListItem extends StatelessWidget {
                       ],
                     ),
                     Text("৳ ${item.charge!.discountCharge}",
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize:12,
                           fontWeight: FontWeight.w500,
                           color: AppColors.pinkTextColor,
@@ -146,13 +147,9 @@ class SearchProductListItem extends StatelessWidget {
           ),
         ),
 
-        const Align(
-            alignment: Alignment.bottomCenter,
-            child: CircleAvatar(
-
-              child: Icon(Icons.add),
-              radius: 20,
-            )
+        Align(
+          alignment: Alignment.bottomCenter,
+          child:AddButton(item:item, index: index),
         ) ],
     );
   }

@@ -1,9 +1,8 @@
 
 import 'package:ecommerce_bloc/core/services/internet_connection.dart';
-import 'package:ecommerce_bloc/data/repositories/search_product_repository_interface.dart';
-import 'package:ecommerce_bloc/modules/search_product/models/search_product.dart';
-
+import 'package:ecommerce_bloc/modules/search_product/data/repositories/search_product_repository_interface.dart';
 import '../local/product_cache.dart';
+import '../models/search_product.dart';
 import '../remote/product_remote_data_source.dart';
 
 class SearchProductRepositoryImpl implements SearchProductRepository{
