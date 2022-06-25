@@ -1,6 +1,7 @@
 
-import 'package:ecommerce_bloc/core/services/internet_connection.dart';
 import 'package:ecommerce_bloc/modules/search_product/data/repositories/search_product_repository_interface.dart';
+import 'package:ecommerce_bloc/modules/search_product/data/repositories/search_product_repository_interface.dart';
+import 'package:flutter/foundation.dart';
 import '../local/product_cache.dart';
 import '../models/search_product.dart';
 import '../remote/product_remote_data_source.dart';
@@ -15,15 +16,14 @@ class SearchProductRepositoryImpl implements SearchProductRepository{
   Future<List<SearchProduct>> search({String? term, String? offset, String? limit}) async{
     // TODO: implement search
        print('inside repo>>>>>>>>>> input > $term offset> $offset limit $limit');
-    // final cachedResult = cache.get(term!);
-    //    if (cachedResult != null) {
-    //      return cachedResult;
-    //    }
+
     final result = await client.getSearchProduct(query: term.toString(),limit: limit.toString()
         ,offset: offset.toString());
 
-    print('after api calling repo>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-   // cache.set(term, result);
+    if (kDebugMode) {
+      print('after api calling repo>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+    }
+
     return result;
   }
 }

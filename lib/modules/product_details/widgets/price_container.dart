@@ -230,62 +230,69 @@ class PriceContainer extends StatelessWidget {
 
 
                 ///add to cart button
-                Align(
+              item.stock==0?SizedBox():Align(
                     alignment: Alignment.bottomCenter,
                     child: Stack(
                       children: [
                         SizedBox(
                           height: 80,
-                          child: ClipPolygon(
-                            sides: 6,
-                            borderRadius: 5.0,
-                            child: Container(
-                              decoration: const BoxDecoration(
+                          child: InkWell(
+                            onTap: cartIndex!=-1? null
+                                : () {
+                              //print('is in cart>>>>>>>>>>> $cartIndex');
+                              context.read<CartBloc>().add(CartItemAdded(item));
+                            },
+                            child: ClipPolygon(
+                              sides: 6,
+                              borderRadius: 5.0,
+                              child: Container(
+                                decoration: const BoxDecoration(
 
 
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors:[
-                                        AppColors.topLinearGradientColor,
-                                        AppColors.bottomLinearGradientColor,
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors:[
+                                          AppColors.topLinearGradientColor,
+                                          AppColors.bottomLinearGradientColor,
 
-                                      ])
-                              ),
-                              height: 50,
-
-                              child: Column(
-                                mainAxisAlignment:MainAxisAlignment.center
-                                ,children:  [
-                                cartIndex!=-1?Column(
-                                  children: const [
-                                    Image(image: AssetImage('assets/images/shopping_bag.png')),
-
-                                    Text("কার্ট",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppColors.colorWhite
-                                      ),
-                                    )
-                                  ],
-
-                                ):
-                                Text("এটি\nকিনুন",
-                                  style: TextStyle(
-                                      fontSize:14,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.colorWhite
-                                  ),
+                                        ])
                                 ),
-                                // Text("কিনুন",
-                                //   style: TextStyle(
-                                //       fontSize:14,
-                                //       fontWeight: FontWeight.w400,
-                                //       color: AppColors.colorWhite
-                                //   ),),
+                                height: 50,
 
-                              ],),
+                                child: Column(
+                                  mainAxisAlignment:MainAxisAlignment.center
+                                  ,children:  [
+                                  cartIndex!=-1?Column(
+                                    children: const [
+                                      Image(image: AssetImage('assets/images/shopping_bag.png')),
+
+                                      Text("কার্ট",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppColors.colorWhite
+                                        ),
+                                      )
+                                    ],
+
+                                  ):
+                                  const Text("এটি\nকিনুন",
+                                    style: TextStyle(
+                                        fontSize:14,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.colorWhite
+                                    ),
+                                  ),
+                                  // Text("কিনুন",
+                                  //   style: TextStyle(
+                                  //       fontSize:14,
+                                  //       fontWeight: FontWeight.w400,
+                                  //       color: AppColors.colorWhite
+                                  //   ),),
+
+                                ],),
+                              ),
                             ),
                           ),
                         ),

@@ -1,4 +1,5 @@
 
+import 'package:ecommerce_bloc/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'modules/cart/data/repository/shopping_repository.dart';
@@ -16,22 +17,27 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return      MultiBlocProvider(
+    return  MultiBlocProvider(
 
       providers: [
         BlocProvider(
           create: (_) => SearchProductBloc(
-              searchProductRepository: searchProductRepository),
+              searchProductRepository: locator.get<SearchProductRepository>()),
         ),
         BlocProvider(
           create: (_) => CartBloc(
-            shoppingRepository: shoppingRepository,
+            shoppingRepository: locator.get<ShoppingRepository>(),
           )..add(CartStarted()),
         )
       ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: SearchProductPage(),
+      child: GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+          },
+        child: const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: SearchProductPage(),
+        ),
       ),
     )
     ;

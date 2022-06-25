@@ -10,7 +10,7 @@ import '../models/search_product.dart';
 
 class ProductRemoteDataSourceImpl implements ProductRemoteDataSource{
 
-  ProductRemoteDataSourceImpl(this.httpClient);
+  ProductRemoteDataSourceImpl(this.httpClient, );
 
   final http.Client httpClient;
   @override
@@ -31,7 +31,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource{
     );
 
     if (response.statusCode == 200) {
-      FocusManager.instance.primaryFocus?.unfocus();
+    //  FocusManager.instance.primaryFocus?.unfocus();
       print(response.statusCode);
       dynamic jsonResponse = json.decode(utf8.decode(response.bodyBytes));
        print('results array >>>>>>>>>>>  ${ jsonResponse["data"]["products"]["results"]}');

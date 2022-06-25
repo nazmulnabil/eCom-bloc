@@ -43,7 +43,7 @@ class AddButton extends StatelessWidget {
             child:
             cartIndex!=-1? Container(
               height: 36,
-              margin: EdgeInsets.symmetric(horizontal: 4.0),
+              margin: const EdgeInsets.symmetric(horizontal: 4.0),
               decoration: const BoxDecoration(
                   color:AppColors.counterRowBackground ,
                   // border: Border.all(

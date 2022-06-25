@@ -31,13 +31,7 @@ class _SearchProductListState extends State<SearchProductList> {
 
     Widget build(BuildContext context) {
 
-      final SearchProductBloc searchProductBloc=context.read<SearchProductBloc>();
-    // final width=MediaQuery.of(context).size.width;
-  //  print("items >>>>>>>>>>>>>>> ${widget.items}");
-   // print("len >>>>>>>>> ${widget.len}");
-   // print("items len len >>>>>>>>> ${widget.itemsLen}");
     return  GridView.builder(
-      //physics: widget.items.length==widget.len?NeverScrollableScrollPhysics():AlwaysScrollableScrollPhysics(),
         gridDelegate:  const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
             childAspectRatio: 2 /3.25,

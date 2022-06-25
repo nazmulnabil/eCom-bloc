@@ -2,11 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:stream_transform/stream_transform.dart';
-
 import '../../data/models/search_product.dart';
 import '../../data/repositories/search_product_repository_interface.dart';
-
-
 part 'search_product_event.dart';
 part 'search_product_state.dart';
 
@@ -62,12 +59,8 @@ class SearchProductBloc extends Bloc<SearchProductEvent, SearchProductState> {
       OnNextPage event,
       Emitter<SearchProductState> emit,
       ) async {
-
     final searchTerm =inputText;
     final state=this.state;
-    //if (searchTerm.isEmpty) return emit(SearchStateEmpty());
-
-
 
     if(state is SearchStateSuccess){
 
@@ -88,10 +81,9 @@ class SearchProductBloc extends Bloc<SearchProductEvent, SearchProductState> {
          resultsOnNextPage.isEmpty? emit(state.copyWith(hasReachedMax:true )):
         emit(state.copyWith(items: List.of(state.items)..addAll(resultsOnNextPage),));
 
-    print('resultsOnNextPage max>>>>>>>>>>>>>>>>>>>>>>>>>> ${state.hasReachedMax}');
-
-
-
+    if (kDebugMode) {
+      print('resultsOnNextPage max>>>>>>>>>>>>>>>>>>>>>>>>>> ${state.hasReachedMax}');
+    }
   } catch (error) {
     emit(error is SearchStateError
         ? SearchStateError(error.error)
