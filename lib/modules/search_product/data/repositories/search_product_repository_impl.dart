@@ -21,6 +21,8 @@ class SearchProductRepositoryImpl implements SearchProductRepository{
     //    }
     final result = await client.getSearchProduct(query: term.toString(),limit: limit.toString()
         ,offset: offset.toString());
+
+    print('after api calling repo>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
    // cache.set(term, result);
     return result;
   }

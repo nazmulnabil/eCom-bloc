@@ -7,11 +7,11 @@ import '../widgets/bottom_loader.dart';
 import '../widgets/search_product_list_item.dart';
 
 class SearchProductList extends StatefulWidget {
-  const SearchProductList({Key? key, required this.items, required this.len, required this.itemsLen}) : super(key: key);
+  const SearchProductList({Key? key, required this.items, required this.len}) : super(key: key);
 
   final List<SearchProduct> items;
   final int len;
-  final int itemsLen;
+
 
   @override
   State<SearchProductList> createState() => _SearchProductListState();
@@ -28,15 +28,16 @@ class _SearchProductListState extends State<SearchProductList> {
   }
 
   @override
-  Widget build(BuildContext context) {
 
-    final SearchProductBloc searchProductBloc=context.read<SearchProductBloc>();
+    Widget build(BuildContext context) {
 
+      final SearchProductBloc searchProductBloc=context.read<SearchProductBloc>();
     // final width=MediaQuery.of(context).size.width;
-    print("items >>>>>>>>>>>>>>> ${widget.items}");
-    print("len >>>>>>>>> ${widget.len}");
-    print("items len len >>>>>>>>> ${widget.itemsLen}");
+  //  print("items >>>>>>>>>>>>>>> ${widget.items}");
+   // print("len >>>>>>>>> ${widget.len}");
+   // print("items len len >>>>>>>>> ${widget.itemsLen}");
     return  GridView.builder(
+      //physics: widget.items.length==widget.len?NeverScrollableScrollPhysics():AlwaysScrollableScrollPhysics(),
         gridDelegate:  const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
             childAspectRatio: 2 /3.25,
@@ -46,8 +47,8 @@ class _SearchProductListState extends State<SearchProductList> {
         controller: _scrollController,
         itemBuilder: (BuildContext ctx, index) {
 
-          if( index>=widget.itemsLen) {
-            return Loader();
+          if( index>=widget.items.length) {
+            return const Loader();
           } else{
             return SearchProductListItem(item: widget.items[index], index: index,);
           }
@@ -64,7 +65,8 @@ class _SearchProductListState extends State<SearchProductList> {
   }
 
   void _onScroll() {
-    if (_isBottom) context.read<SearchProductBloc>().add( const OnNextPage());
+
+    if (_isBottom&&(widget.items.length<widget.len)) context.read<SearchProductBloc>().add( const OnNextPage());
   }
 
   bool get _isBottom {

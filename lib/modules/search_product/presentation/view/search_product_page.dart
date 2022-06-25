@@ -17,7 +17,7 @@ class SearchProductPage extends StatelessWidget {
 
             const SizedBox(height: 50,),
             //Textield
-            CustomTextField(),
+            CustomTextField(bottomPadding: 32, topPadding: 0,leftPadding: 15, rightPadding: 15,),
             _SearchBody(),
           ],
         ),
@@ -27,31 +27,35 @@ class SearchProductPage extends StatelessWidget {
 }
 
 class _SearchBody extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchProductBloc, SearchProductState>(
+
       builder: (context, state) {
         if (state is SearchStateLoading) {
+
           return const CircularProgressIndicator();
         }
         if (state is SearchStateError) {
           return Text(state.error);
         }
+
+
         if (state is SearchStateSuccess) {
 
-          int length=context.read<SearchProductBloc>().hasReachedMax?state.items.length:
+                  print('max??????????????? <<<<<< ${state.hasReachedMax}');
+          int length=state.hasReachedMax?state.items.length:
           state.items.length+2;
-          int itemsLength=state.items.length;
 
           if (kDebugMode) {
             print('length>>>>> $length');
           }
-          if (kDebugMode) {
-            print('items  length>>>>> $itemsLength');
-          }
+
           return state.items.isEmpty
               ? const Text('No Results')
-              : Expanded(child: SearchProductList(items: state.items,len:length, itemsLen: itemsLength,));
+              : Expanded(child: SearchProductList(items: state.items,len:length));
         }
         return const Text('Please enter a term to begin');
       },

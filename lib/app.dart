@@ -16,26 +16,25 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: MultiBlocProvider(
+    return      MultiBlocProvider(
 
-          providers: [
-            BlocProvider(
-              create: (_) => SearchProductBloc(
-                  searchProductRepository: searchProductRepository),
-            ),
-            BlocProvider(
-              create: (_) => CartBloc(
-                shoppingRepository: shoppingRepository,
-              )..add(CartStarted()),
-            )
-          ],
-          child: const SearchProductPage(),
+      providers: [
+        BlocProvider(
+          create: (_) => SearchProductBloc(
+              searchProductRepository: searchProductRepository),
         ),
+        BlocProvider(
+          create: (_) => CartBloc(
+            shoppingRepository: shoppingRepository,
+          )..add(CartStarted()),
+        )
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SearchProductPage(),
       ),
-    );
+    )
+    ;
 
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:ecommerce_bloc/modules/search_product/data/remote/product_remote_data_source.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/search_product.dart';
@@ -12,7 +13,6 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource{
   ProductRemoteDataSourceImpl(this.httpClient);
 
   final http.Client httpClient;
-
   @override
   Future<List<SearchProduct>> getSearchProduct({String? query, String? offset, String? limit}) async{
     // TODO: implement getSearchProduct
@@ -31,6 +31,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource{
     );
 
     if (response.statusCode == 200) {
+      FocusManager.instance.primaryFocus?.unfocus();
       print(response.statusCode);
       dynamic jsonResponse = json.decode(utf8.decode(response.bodyBytes));
        print('results array >>>>>>>>>>>  ${ jsonResponse["data"]["products"]["results"]}');
@@ -44,6 +45,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource{
           SearchProduct.fromJson(product)).toList() as List<SearchProduct>;
       // productsList.addAll(searchProductData.data!.products!.results!);
       print('productsList>>>>>>>>>>>>>>>>>>>$productsList');
+
       return productsList;
     }
     throw Exception('error fetching posts');

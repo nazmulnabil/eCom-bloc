@@ -5,6 +5,7 @@ part of 'search_product_bloc.dart';
 abstract class SearchProductState extends Equatable {
 
    SearchProductState();
+   bool hasReachedMax=false;
   @override
   List<Object> get props => [];
 }
@@ -17,9 +18,27 @@ class SearchStateLoading extends SearchProductState {
    SearchStateLoading();
 }
 
+// class FetchingNextPage extends SearchProductState {
+//   FetchingNextPage();
+// }
+
 class SearchStateSuccess extends SearchProductState {
-   SearchStateSuccess({required this.items}) ;
+   SearchStateSuccess(  { this.items=const<SearchProduct>[], this.hasReachedMax=false,}) ;
   final List<SearchProduct> items;
+  final bool hasReachedMax;
+
+
+   SearchStateSuccess copyWith({
+
+     List<SearchProduct>? items,
+     bool? hasReachedMax,
+   }) {
+     return SearchStateSuccess(
+       items: items ?? this.items,
+       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+     );
+   }
+
 
   @override
   List<Object> get props => [items];

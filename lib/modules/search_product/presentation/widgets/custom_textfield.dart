@@ -8,7 +8,12 @@ import '../bloc/search_product_bloc.dart';
 
 class CustomTextField extends StatefulWidget {
 
-   CustomTextField({Key? key}) : super(key: key);
+   CustomTextField({Key? key,required this.bottomPadding, required this.leftPadding, required this.rightPadding, required this.topPadding}) : super(key: key);
+
+   final double bottomPadding;
+   final double leftPadding;
+   final double rightPadding;
+   final double topPadding;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -34,7 +39,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return     Padding(
-      padding: const EdgeInsets.only(left: 15,right: 15,bottom: 32),
+      padding:  EdgeInsets.only(left: widget.leftPadding,right: widget.rightPadding,bottom: widget.bottomPadding),
       child: SizedBox(
         height: 48,
         child: TextField(
