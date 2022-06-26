@@ -1,3 +1,4 @@
+import 'package:ecommerce_bloc/core/app_colors.dart';
 import 'package:ecommerce_bloc/modules/search_product/presentation/view/search_product_list.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,16 +11,19 @@ class SearchProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children:  [
+    return Container(
+      color: AppColors.pageBackground,
+      child: SafeArea(
+        child: Scaffold(
+          body: Column(
+            children:  [
 
-            const SizedBox(height: 50,),
-            //Textield
-            CustomTextField(bottomPadding: 32, topPadding: 0,leftPadding: 15, rightPadding: 15,),
-            _SearchBody(),
-          ],
+              const SizedBox(height: 50,),
+              //Textield
+              CustomTextField(bottomPadding: 32, topPadding: 0,leftPadding: 15, rightPadding: 15,),
+              _SearchBody(),
+            ],
+          ),
         ),
       ),
     );
@@ -42,10 +46,12 @@ class _SearchBody extends StatelessWidget {
           return Text(state.error);
         }
 
-
         if (state is SearchStateSuccess) {
 
-                  print('max??????????????? <<<<<< ${state.hasReachedMax}');
+          if (kDebugMode) {
+            print('max??????????????? <<<<<< ${state.hasReachedMax}');
+          }
+
           int length=state.hasReachedMax?state.items.length:
           state.items.length+2;
 

@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/app_colors.dart';
-import '../../../cart/data/repository/shopping_repository.dart';
 import '../../../cart/presentation/bloc/cart_bloc.dart';
 import '../../data/models/search_product.dart';
 
@@ -15,8 +14,6 @@ class AddButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ShoppingRepository shoppingRepository=ShoppingRepository();
-    final theme = Theme.of(context);
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
         if (state is CartLoading) {
@@ -116,9 +113,22 @@ class AddButton extends StatelessWidget {
                 ),
               ),
             )
-                : const CircleAvatar(
-              child: Icon(Icons.add),
-              radius: 20,
+                :  CircleAvatar(
+              child: Container(
+                padding: EdgeInsets.all(8),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors:[
+                            AppColors.topLinearGradientColor,
+                            AppColors.bottomLinearGradientColor,
+
+                          ])
+                  ),
+                  child: Icon(Icons.add)),
+             // radius: 20,
             ),
           );
         }

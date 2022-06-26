@@ -1,6 +1,7 @@
 
 import 'package:ecommerce_bloc/injection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'modules/cart/data/repository/shopping_repository.dart';
 import 'modules/cart/presentation/bloc/cart_bloc.dart';
@@ -17,6 +18,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return  MultiBlocProvider(
 
       providers: [
@@ -34,7 +39,7 @@ class App extends StatelessWidget {
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
           },
-        child: const MaterialApp(
+        child:  const MaterialApp(
           debugShowCheckedModeBanner: false,
           home: SearchProductPage(),
         ),

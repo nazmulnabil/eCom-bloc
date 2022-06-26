@@ -8,7 +8,7 @@ import '../bloc/search_product_bloc.dart';
 
 class CustomTextField extends StatefulWidget {
 
-   CustomTextField({Key? key,required this.bottomPadding, required this.leftPadding, required this.rightPadding, required this.topPadding}) : super(key: key);
+   const CustomTextField({Key? key,required this.bottomPadding, required this.leftPadding, required this.rightPadding, required this.topPadding}) : super(key: key);
 
    final double bottomPadding;
    final double leftPadding;

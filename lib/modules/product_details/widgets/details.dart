@@ -11,7 +11,7 @@ class Details extends StatelessWidget {
     final document = parse(item.description.toString());
     final String parsedString = parse(document.body!.text).documentElement!.text;
     return Padding(
-      padding: EdgeInsets.only(left: 20.0),
+      padding: const EdgeInsets.only(left: 20.0),
       child: Text(parsedString,
         style: const TextStyle(
             fontSize:16,

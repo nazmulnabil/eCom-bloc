@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_bloc/modules/search_product/data/models/search_product.dart';
 
 class ImageCarousel extends StatelessWidget {
-   ImageCarousel({required this.images,Key? key}) : super(key: key);
+   const ImageCarousel({required this.images,Key? key}) : super(key: key);
 
-  List<Images>? images;
+  final List<Images>? images;
   get callbackFunction => null;
 
   @override

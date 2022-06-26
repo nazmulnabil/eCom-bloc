@@ -89,7 +89,7 @@ class _SearchProductListItemState extends State<SearchProductListItem> {
                         ),
                       ),
                     ),
-                    placeholder: (context, url) =>Loader(),
+                    placeholder: (context, url) =>const Loader(),
                     errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
                 ),

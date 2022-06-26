@@ -28,19 +28,17 @@ class PriceContainer extends StatelessWidget {
             final cartIndex = state.cart.items.indexWhere((element) =>
             element.item==item);
 
+            if (kDebugMode) {
+              print('cart item index matches??? >>>>>>>>>>>>>>>>>  ${state.cart.items.indexWhere((element) => element.item==item)}');
+            }
 
-
-            print('cart item matches >>>>>>>>>>>>>>>>>  ${state.cart.items.indexWhere((element) => element.item==item)}');
-
-            //   print('is in cart>>>>>>>>>>> $isInCart');
-            // print('product item index>>>>>>>>>>> $index');
-            return      Stack(
+            return  Stack(
               // alignment: Alignment.bottomCenter,
               children: [
 
                 Container(
-                  margin: EdgeInsets.only(left:15,right: 15,bottom: 15),
-                  padding:EdgeInsets.only(bottom: 15) ,
+                  margin: const EdgeInsets.only(left:15,right: 15,bottom: 15),
+                  padding:const EdgeInsets.only(bottom: 15) ,
                   height: 116,
                   decoration: const BoxDecoration(
                     color: AppColors.colorWhite,
@@ -98,7 +96,7 @@ class PriceContainer extends StatelessWidget {
 
                         //horizontal divider
                         Expanded(child: Container(
-                          padding:EdgeInsets.only(top:5) ,
+                          padding:const EdgeInsets.only(top:5) ,
 
                           child: ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
@@ -150,7 +148,7 @@ class PriceContainer extends StatelessWidget {
                     cartIndex!=-1? Container(
                       height: 36,
                       width:width/2.5,
-                      margin: EdgeInsets.symmetric(horizontal: 4.0),
+                      margin: const EdgeInsets.symmetric(horizontal: 4.0),
                       decoration: const BoxDecoration(
                           color:AppColors.counterRowBackground ,
                           // border: Border.all(
@@ -165,14 +163,9 @@ class PriceContainer extends StatelessWidget {
                           children: [
                             InkWell(
                                 onTap: (){
-                                  print('cart item index in view $cartIndex ]}');
-                                  print('cart item >>>>>>>>>>>>>>> ${ state.cart.items[cartIndex]}');
-                                  //final cartItemIndex = state.cart.items.indexWhere((element) => element.item==item);
-                                  //
-                                  // if(state.cart.items[isInsideCart].count<1){
-                                  //   context.read<CartBloc>().add(CartItemRemoved(state.cart.items[isInsideCart]));
-                                  // }
-
+                                  if (kDebugMode) {
+                                    print('cart item index in view $cartIndex ]}');
+                                  }
                                   state.cart.items[cartIndex].count<=1?
                                   context.read<CartBloc>().add(CartItemRemoved(state.cart.items[cartIndex],)):
                                   context.read<CartBloc>()
@@ -230,7 +223,7 @@ class PriceContainer extends StatelessWidget {
 
 
                 ///add to cart button
-              item.stock==0?SizedBox():Align(
+              item.stock==0?const SizedBox():Align(
                     alignment: Alignment.bottomCenter,
                     child: Stack(
                       children: [
@@ -321,7 +314,7 @@ class PriceContainer extends StatelessWidget {
                cartIndex!=-1?  Align(
                   alignment: Alignment.center,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 60.0,top: 40),
+                    padding: const EdgeInsets.only(left: 60.0,top: 40),
                     child: CircleAvatar(
                       radius: 15,
                       backgroundColor: AppColors.colorWhite,
@@ -339,7 +332,7 @@ class PriceContainer extends StatelessWidget {
                     ),
                   ),
 
-                ):SizedBox(),
+                ):const SizedBox(),
               ],
             );
           }
