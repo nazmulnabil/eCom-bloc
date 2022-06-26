@@ -42,7 +42,7 @@ Based on user interaction it will add,remove products in the cart and also incre
 ############# Dependency Injection ################
 
 In stead of making the classes construct their dependencies directly I've used the <<<<<< service locator >>>>>>>>> design pattern
-where all the dependencies are registered in a centralized place before athe pp starts.More specifically before runApp() method...
+where all the dependencies are registered in a centralized place in a method  before the app starts.More specifically the method inside service locator where all the dependencies are registered are called.  before runApp() method...Then the dependencies are registered before starting the app unless it is registered lazily..In case of lazy singleton or lazy factory the dependencies are called when they are called.
 
 Service locator hides the creation logic of instances and also facilitates unit testing...
 
